@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Otorgado</title>
+
+</head>
+<body>
+    <h2>Bienvenido Agente {{email}}</h2>
+    <br>
+    <h3>Ingrese aquí para ver sus últimos expedientes</h3>
+    <br>
+    <a href="/expedientes?token={{token}}">Ver expedientes</a>
+<footer>
+    {{token}}
+</footer>
+
+<style>
+* {
+margin: 0;
+padding: 0;
+}
+body {
+background: black;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+height: 60vh;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    font-size: smaller;
+    color:grey;
+}
+</style>
+
+<script>
+sessionStorage.setItem("token", "{{token}}")
+//si existe token, agregarlo al link de acceso a expedientes
+
+const mostrarExpedientes = async () => {
+    const token = sessionStorage.getItem("token")
+    await fetch(`/expedientes?token=${token}`)
+
+}
+</script>
+</body>
+</html>
